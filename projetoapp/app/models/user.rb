@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   end
   
   def verify_email
-    result = get_response_email(email) unless email.blank?
+    return if email.blank?
+    result = get_response_email(email)
     errors.add(:email, "não existe! Verifique.") if result==nil || result["result"] == "invalid"
   end
          
